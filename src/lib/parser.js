@@ -13,7 +13,7 @@ module.exports = (req) => {
 
     req.query = queryString.parse(req.parsed.query);
 
-    if(!req.mehtod.match(/POST|PUT|PATCH/)) {
+    if(!req.method.match(/POST|PUT|PATCH/)) {
       resolve(req);
     }
 
