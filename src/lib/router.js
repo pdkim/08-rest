@@ -20,11 +20,9 @@ methods.forEach((method) => {
 
 
 router.route = (req, res) => {
-
   return parser(req)
     .then(req => {
       let handler = router.routes[req.method][req.parsed.pathname];
-
       if(handler) {
         return handler(req, res);
       }

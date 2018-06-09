@@ -24,20 +24,14 @@ router.get('/api/v1/students', (req, res) => {
 });
 
 //post data as stringified JSON
-router.post('/data', (req, res) => {
-  console.log(req);
+router.post('/api/v1/students', (req, res) => {
   getHTMLResponse(res);
-  //need to figure out code for post and if this is correct data format
-  let jaysonP = JSON.parse(req.body);
-  console.log(jaysonP);
-  res.write(jaysonP);
+  res.write(JSON.stringify(req.body));
   res.end();
 });
 
 //put ?id=(uuid) as string parameter to find specfic resource
-//stringify JSON data
 router.put('/update', (req, res) => {
-  console.log(req);
   getHTMLResponse(res);
   //need to figure out code for put and if this is correct data format
   let jaysonS = JSON.stringify(req.body);
