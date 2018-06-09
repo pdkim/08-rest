@@ -15,27 +15,21 @@ router.get('/', (req, res) => {
   res.end();
 });
 
-//get resource name /api/v1/name
+//get resource name of specified id (?id=(uuid))
 router.get('/api/v1/students', (req, res) => {
   getHTMLResponse(res);
-  res.write('testing');
-  res.end();
-});
-
-
-//get resource name of specified id (?id=(uuid))
-router.get('/api/v1/students?id', (req, res) => {
-  getHTMLResponse(res);
-  let idNum = 'fake';
+  let idNum = req.query.id;
   res.write(`ID: ${idNum} was requested`);
   res.end();
 });
 
 //post data as stringified JSON
 router.post('/data', (req, res) => {
+  console.log(req);
   getHTMLResponse(res);
   //need to figure out code for post and if this is correct data format
   let jaysonP = JSON.parse(req.body);
+  console.log(jaysonP);
   res.write(jaysonP);
   res.end();
 });
@@ -43,9 +37,11 @@ router.post('/data', (req, res) => {
 //put ?id=(uuid) as string parameter to find specfic resource
 //stringify JSON data
 router.put('/update', (req, res) => {
+  console.log(req);
   getHTMLResponse(res);
   //need to figure out code for put and if this is correct data format
   let jaysonS = JSON.stringify(req.body);
+  console.log(jaysonS);
   res.write(jaysonS);
   res.end();
 });
