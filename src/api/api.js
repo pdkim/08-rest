@@ -54,15 +54,15 @@ router.post('/api/v1/students', (req, res) => {
 //put ?id=(uuid) as string parameter to find specfic resource
 router.put('/api/v1/students', (req, res) => {
   let idNum = req.query.id;
-  if(err) {
-    console.error(err);
+  if(!idNum) {
+    res.statusCode = 400;
+    res.statusMessage = 'bad request';
+    res.write(err);
+    res.end();
   }
   else {
     getHTMLResponse(res);
-    //need to figure out code for put and if this is correct data format
-    // let jaysonS = JSON.stringify(req.body);
-    const newData = idNum.body;
-    res.write(JSON.stringify(newData));
+    res.write(JSON.stringify(req.body));
     res.end();
   }
 });
@@ -70,7 +70,7 @@ router.put('/api/v1/students', (req, res) => {
 
 //delete by passing ?id=(uuid)
 //return message 'ID was deleted'
-router.delete('api/v1/delete', (req, res) => {
+router.delete('api/v1/students', (req, res) => {
   let idNum = req.query.id;
   getHTMLResponse(res);
   //need to figure out code to remove id.
