@@ -70,7 +70,7 @@ router.put('/api/v1/students', (req, res) => {
 
 //delete by passing ?id=(uuid)
 //return message 'ID was deleted'
-router.delete('api/v1/students', (req, res) => {
+router.delete('/api/v1/students', (req, res) => {
   let idNum = req.query.id;
   getHTMLResponse(res);
   //need to figure out code to remove id.
