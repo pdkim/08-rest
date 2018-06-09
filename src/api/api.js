@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   res.end();
 });
 
-//get resource name of specified id (?id=(uuid))
+//get id
 router.get('/api/v1/students', (req, res) => {
   let idNum = req.query.id;
   if(idNum === null || idNum === undefined) {
@@ -23,7 +23,7 @@ router.get('/api/v1/students', (req, res) => {
     res.write('Not Found');
     res.end();
   }
-  if(idNum === '') {
+  else if(idNum === '') {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
     res.write('Bad Request');
@@ -36,9 +36,9 @@ router.get('/api/v1/students', (req, res) => {
   }
 });
 
-//post data as stringified JSON
+//post
 router.post('/api/v1/students', (req, res) => {
-  if(!req.body || req.body === '') {
+  if(req.body === undefined || req.body === null) {
     res.statusCode = 400;
     res.statusMessage = 'bad request';
     res.write(err);
@@ -51,7 +51,7 @@ router.post('/api/v1/students', (req, res) => {
   }
 });
 
-//put ?id=(uuid) as string parameter to find specfic resource
+//put
 router.put('/api/v1/students', (req, res) => {
   let idNum = req.query.id;
   if(!idNum) {
@@ -67,13 +67,10 @@ router.put('/api/v1/students', (req, res) => {
   }
 });
 
-
-//delete by passing ?id=(uuid)
-//return message 'ID was deleted'
+//delete
 router.delete('/api/v1/students', (req, res) => {
   let idNum = req.query.id;
   getHTMLResponse(res);
-  //need to figure out code to remove id.
   res.write(`ID: ${idNum} was deleted.`);
   res.end();
 });
