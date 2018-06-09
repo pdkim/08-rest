@@ -3,7 +3,6 @@
 const router = require('../lib/router.js');
 
 const getHTMLResponse = (res) => {
-  res.setHeader('Content-Type', 'text/html');
   res.statusCode = 200;
   res.statusMessage = 'OK';
 };
@@ -17,35 +16,63 @@ router.get('/', (req, res) => {
 
 //get resource name of specified id (?id=(uuid))
 router.get('/api/v1/students', (req, res) => {
-  getHTMLResponse(res);
   let idNum = req.query.id;
-  res.write(`ID: ${idNum} was requested`);
-  res.end();
+  if(idNum === null || idNum === undefined) {
+    res.statusCode = 404;
+    res.statusMessage = 'Not Found';
+    res.write('Not Found');
+    res.end();
+  }
+  if(idNum === '') {
+    res.statusCode = 400;
+    res.statusMessage = 'Bad Request';
+    res.write('Bad Request');
+    res.end();
+  }
+  else {
+    getHTMLResponse(res);
+    res.write(`ID: ${idNum} was requested`);
+    res.end();
+  }
 });
 
 //post data as stringified JSON
 router.post('/api/v1/students', (req, res) => {
-  getHTMLResponse(res);
-  res.write(JSON.stringify(req.body));
-  res.end();
+  if(!req.body || req.body === '') {
+    res.statusCode = 400;
+    res.statusMessage = 'bad request';
+    res.write(err);
+    res.end();
+  }
+  else {
+    getHTMLResponse(res);
+    res.write(JSON.stringify(req.body));
+    res.end();
+  }
 });
 
 //put ?id=(uuid) as string parameter to find specfic resource
-router.put('/update', (req, res) => {
-  getHTMLResponse(res);
-  //need to figure out code for put and if this is correct data format
-  let jaysonS = JSON.stringify(req.body);
-  console.log(jaysonS);
-  res.write(jaysonS);
-  res.end();
+router.put('/api/v1/students', (req, res) => {
+  let idNum = req.query.id;
+  if(err) {
+    console.error(err);
+  }
+  else {
+    getHTMLResponse(res);
+    //need to figure out code for put and if this is correct data format
+    // let jaysonS = JSON.stringify(req.body);
+    const newData = idNum.body;
+    res.write(JSON.stringify(newData));
+    res.end();
+  }
 });
 
 
 //delete by passing ?id=(uuid)
 //return message 'ID was deleted'
 router.delete('api/v1/delete', (req, res) => {
+  let idNum = req.query.id;
   getHTMLResponse(res);
-  let idNum = 'fake';
   //need to figure out code to remove id.
   res.write(`ID: ${idNum} was deleted.`);
   res.end();

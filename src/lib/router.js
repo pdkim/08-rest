@@ -33,5 +33,5 @@ router.route = (req, res) => {
       res.statusMessage = 'Not Found';
       res.write(`Resource not found (${req.parsed.pathname})`);
       res.end();
-    })
-}
+    });
+};
