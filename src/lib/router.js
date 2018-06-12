@@ -28,6 +28,7 @@ router.route = (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       console.error('NOT_FOUND', req.parsed.pathname);
       res.statusCode = 404;
       res.statusMessage = 'Not Found';

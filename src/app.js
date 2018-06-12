@@ -6,6 +6,7 @@ const router = require('../src/lib/router.js');
 const api = require('./api/api.js');
 
 let isRunning = false;
+console.log(api);
 
 const app = http.createServer(router.route);
 
