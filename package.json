@@ -20,6 +20,7 @@
   "homepage": "https://github.com/pdkim/08-rest#readme",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "eslint": "^4.19.1",
     "lint": "^1.1.2",
     "start": "^5.1.0",
     "test": "^0.6.0"
