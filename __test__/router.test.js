@@ -1,10 +1,10 @@
 'use strict';
 
-const router = require('../src/lib/parser/router.js');
+const router = require('../src/lib/router.js');
 
 describe('Router module', () => {
 
-  xit('registers routes of multiple types', () => {
+  it('can registers routes of multiple types', () => {
     router.get('/', () => true);
     router.put('/', () => true);
     router.post('/', () => true);
@@ -17,7 +17,7 @@ describe('Router module', () => {
     expect( router.routes.DELETE['/']).toBeDefined();
   });
 
-  xit('can create multiple routes of the same type', () => {
+  it('can create multiple routes of the same type', () => {
     router.routes.GET = {};
     router.get('/a', () => true);
     router.get('/b', () => true);
@@ -25,10 +25,10 @@ describe('Router module', () => {
     expect( Object.keys(router.routes.GET).length ).toEqual(3);
   });
 
-  xit('can route get requests', () => {
-    let expected = 'get/test';
-    router.get('/test', () => expected);
-    let req = { method: 'GET', url: 'http://localhost/test?john=bald' };
+  it('can route get requests', () => {
+    let expected = 'get/student';
+    router.get('/student', () => expected);
+    let req = { method: 'GET', url: 'http://localhost/student?id=120' };
     let res = {};
     return router.route(req,res)
       .then( result => expect(result).toEqual(expected));
